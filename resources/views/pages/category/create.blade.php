@@ -13,25 +13,12 @@
             <form action="{{ route('categories.store') }}" method="POST">
                 @csrf
 
-                <!-- Item Name -->
                 <div class="form-group">
-                    <label for="name">Item Name</label>
-                    <input type="text" name="name" id="name" class="form-control" placeholder="Enter item name" required>
-                </div>
-
-                <!-- Description -->
-                <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea name="description" id="description" class="form-control" rows="4" placeholder="Enter description" required></textarea>
-                </div>
-
-                <!-- Status -->
-                <div class="form-group">
-                    <label for="status">Status</label>
-                    <select name="status" id="status" class="form-control">
-                        <option value="1">Active</option>
-                        <option value="0">Inactive</option>
-                    </select>
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" class="form-control" placeholder="Enter name">
+                    @error('name')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <!-- Submit Button -->

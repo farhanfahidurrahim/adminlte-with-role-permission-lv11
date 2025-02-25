@@ -315,22 +315,22 @@ return [
 //            'type' => 'sidebar-menu-search',
 //            'text' => 'search',
 //        ],
-        [
-            'text' => 'blog',
-            'url' => 'admin/blog',
-            'can' => 'manage-blog',
-        ],
-        [
-            'text' => 'pages',
-            'url' => 'admin/pages',
-            'icon' => 'far fa-fw fa-file',
-            'label' => 4,
-            'label_color' => 'success',
-        ],
+//        [
+//            'text' => 'blog',
+//            'url' => 'admin/blog',
+//            'can' => 'manage-blog',
+//        ],
+//        [
+//            'text' => 'pages',
+//            'url' => 'admin/pages',
+//            'icon' => 'far fa-fw fa-file',
+//            'label' => 4,
+//            'label_color' => 'success',
+//        ],
         // Category
         [
             'text' => 'Category',
-            'icon' => 'fas fa-fw fa-share',
+            'icon' => 'far fa-fw fa-file',
             'submenu' => [
                 [
                     'text' => 'index',
@@ -347,7 +347,7 @@ return [
         // Post
         [
             'text' => 'Post',
-            'icon' => 'fas fa-fw fa-share',
+            'icon' => 'far fa-fw fa-file',
             'submenu' => [
                 [
                     'text' => 'index',

@@ -31,7 +31,8 @@
                         @endforeach
                     </td>
                     <td>{{ $row->createdBy->name ?? 'N/A' }}</td>
-                    <td><a href="{{ route('roles.edit', $row->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                    <td>
+                        <a href="{{ route('roles.edit', $row->id) }}" class="btn btn-sm btn-warning">Edit</a>
                         <form action="{{ route('roles.destroy', $row->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
