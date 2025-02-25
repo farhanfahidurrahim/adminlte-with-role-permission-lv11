@@ -327,7 +327,7 @@ return [
             'label' => 4,
             'label_color' => 'success',
         ],
-        // Catgeory
+        // Category
         [
             'text' => 'Category',
             'icon' => 'fas fa-fw fa-share',
@@ -335,10 +335,12 @@ return [
                 [
                     'text' => 'index',
                     'route' => 'categories.index',
+                    'can' => 'categories.index',
                 ],
                 [
                     'text' => 'create',
                     'route' => 'categories.create',
+                    'can' => 'categories.create',
                 ],
             ],
         ],
@@ -350,10 +352,12 @@ return [
                 [
                     'text' => 'index',
                     'route' => 'posts.index',
+                    'can' => 'posts.index',
                 ],
                 [
                     'text' => 'create',
                     'route' => 'posts.create',
+                    'can' => 'posts.create',
                 ],
             ],
         ],
@@ -368,11 +372,13 @@ return [
                     'submenu' => [
                         [
                             'text' => 'List',
-                            'url' => '#',
+                            'route' => 'roles.index',
+                            'can' => 'roles.index',
                         ],
                         [
                             'text' => 'Create',
-                            'url' => '#',
+                            'route' => 'roles.create',
+                            'can' => 'roles.create',
                         ],
                     ],
                 ],
@@ -382,11 +388,29 @@ return [
                     'submenu' => [
                         [
                             'text' => 'List',
-                            'url' => '#',
+                            'route' => 'permissions.index',
+                            'can' => 'permissions.index',
                         ],
                         [
                             'text' => 'Create',
-                            'url' => '#',
+                            'route' => 'permissions.create',
+                            'can' => 'permissions.create',
+                        ],
+                    ],
+                ],
+                [
+                    'text' => 'System User',
+                    'url' => '#',
+                    'submenu' => [
+                        [
+                            'text' => 'List',
+                            'route' => 'users.index',
+                            'can' => 'users.index',
+                        ],
+                        [
+                            'text' => 'Create',
+                            'route' => 'users.create',
+                            'can' => 'users.create',
                         ],
                     ],
                 ],

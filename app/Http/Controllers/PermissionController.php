@@ -3,16 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Support\Facades\Route;
+use Spatie\Permission\Models\Permission;
 
-class CategoryController extends Controller
+class PermissionController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('pages.category.index');
+        $permissions = Permission::all();
+        return view('pages.role_permission.permission.index', compact('permissions'));
     }
 
     /**
@@ -20,7 +22,14 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('pages.category.create');
+        $routes = collect(Route::getRoutes())->map(function ($route) {
+            return $route->getName();
+        })->filter()->toArray();
+
+        $existingPermissions = Permission::pluck('name')->toArray();
+        $routes = array_diff($routes, $existingPermissions);
+
+        return view('pages.role_permission.permission.create', compact('routes'));
     }
 
     /**
@@ -28,7 +37,16 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+           'name' => 'required|unique:permissions,name',
+        ]);
+
+        Permission::create([
+            'name' => $request->name,
+            'module' => $request->module,
+        ]);
+
+        return redirect()->route('permissions.index');
     }
 
     /**
