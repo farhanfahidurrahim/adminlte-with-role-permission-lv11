@@ -36,6 +36,7 @@ class CategoryController extends Controller
 
         Category::create([
             'name' => $request->name,
+            'created_by' => auth()->user()->id,
         ]);
 
         return redirect()->route('categories.index');

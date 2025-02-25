@@ -93,6 +93,9 @@
     <!-- DataTables CSS (Bootstrap 4 version) -->
 {{--    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css">--}}
 
+    <!-- Include Select2 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
 </head>
 
 <body class="@yield('classes_body')" @yield('body_data')>
@@ -136,8 +139,17 @@
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
 
-    <!-- jQuery (required for DataTables) -->
+    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- Include Select2 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2();
+        });
+    </script>
+
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
     <!-- DataTables JS (Bootstrap 4 version) -->

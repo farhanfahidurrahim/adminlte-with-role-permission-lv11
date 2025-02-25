@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name', 100);
             $table->foreignId('category_id');
             $table->enum('status', ['published', 'draft'])->default('published');
+            $table->foreignId('created_by');
+            $table->foreignId('updated_by')->nullable();
             $table->timestamps();
         });
     }
