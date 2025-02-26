@@ -134,18 +134,18 @@
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
 
-    <!-- Select2 JS -->
-    <script>
-        $(document).ready(function() {
-            $('.select2').select2();
-        });
-    </script>
-
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
     <script>
         $(document).ready(function() {
             $('#myTable').DataTable();
+        });
+    </script>
+
+    <!-- Select2 JS -->
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2();
         });
     </script>
 

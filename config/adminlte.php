@@ -327,6 +327,11 @@ return [
 //            'label' => 4,
 //            'label_color' => 'success',
 //        ],
+        [
+            'text' => 'Dashboard',
+            'url' => '/',
+            'icon' => 'fas fa-fw fa-share',
+        ],
         // Category
         [
             'text' => 'Category',

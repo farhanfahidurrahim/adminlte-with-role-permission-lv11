@@ -13,8 +13,9 @@
 
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('posts.store') }}" method="POST">
+            <form action="{{ route('posts.update', $post->id) }}" method="POST">
                 @csrf
+                @method('PATCH')
 
                 <div class="form-group">
                     <label for="name">Name <span class="text-danger">*</span></label>
@@ -29,7 +30,9 @@
                     <select name="category_id" class="form-control select2">
                         <option value="">Select</option>
                         @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            <option value="{{ $category->id }}" {{ old('category_id', $post->category_id) == $category->id ? 'selected' : '' }}>
+                                {{ $category->name }}
+                            </option>
                         @endforeach
                     </select>
                     @error('category_id')
@@ -41,8 +44,8 @@
                     <label for="name">Status <span class="text-danger">*</span></label>
                     <select name="status" class="form-control">
                         <option value="">Select</option>
-                        <option value="published">Published</option>
-                        <option value="draft">Draft</option>
+                        <option value="published" {{ old('status', $post->status) == 'published' ? 'selected' : '' }}>Published</option>
+                        <option value="draft" {{ old('status', $post->status) == 'draft' ? 'selected' : '' }}>Draft</option>
                     </select>
                     @error('status')
                     <div class="text-danger mt-1">{{ $message }}</div>

@@ -5,12 +5,11 @@
 @section('content_header')
     <div class="d-flex justify-content-between">
         <h1>Post List</h1>
-        <a href="{{ route('posts.create') }}" class="btn btn-primary">Add New</a>
+        <a href="{{ route('posts.create') }}" class="btn btn-sm btn-primary">Add New</a>
     </div>
 @stop
-
 @section('content')
-    <table class="table" id="yajraTable">
+    <table id="yajraTable" class="table display" style="width:100%">
         <thead>
         <tr>
             <th>SL</th>
