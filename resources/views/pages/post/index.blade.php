@@ -24,7 +24,7 @@
 
         <!-- Export -->
         <div class="col-md-4">
-            <a href="#" class="btn btn-sm btn-success" id="exportPostBtn">Export Posts</a>
+            <a href="#" class="btn btn-sm btn-success" id="excelExportBtn">Excel</a>
             <a href="" class="btn btn-sm btn-danger" id="pdfExportBtn">PDF</a>
         </div>
     </div>
@@ -92,7 +92,7 @@
 
     {{--    Handle export button click with date filters--}}
     <script>
-        document.getElementById('exportPostBtn').addEventListener('click', function () {
+        document.getElementById('excelExportBtn').addEventListener('click', function () {
             const dateFrom = document.getElementById('date_from').value;
             const dateTo = document.getElementById('date_to').value;
 
