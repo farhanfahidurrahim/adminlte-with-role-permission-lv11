@@ -25,7 +25,7 @@
         <!-- Export -->
         <div class="col-md-4">
             <a href="#" class="btn btn-sm btn-success" id="excelExportBtn">Excel</a>
-            <a href="" class="btn btn-sm btn-danger" id="pdfExportBtn">PDF</a>
+            <a href="#" class="btn btn-sm btn-danger" id="pdfExportBtn">PDF</a>
         </div>
     </div>
 
@@ -90,8 +90,9 @@
         });
     </script>
 
-    {{--    Handle export button click with date filters--}}
+    {{--Handle export button click with date filters--}}
     <script>
+        // Handle EXCEL export button click
         document.getElementById('excelExportBtn').addEventListener('click', function () {
             const dateFrom = document.getElementById('date_from').value;
             const dateTo = document.getElementById('date_to').value;
@@ -105,6 +106,24 @@
             }
 
             window.location.href = url; // Trigger the download
+        });
+
+        // Handle PDF export button click
+        document.getElementById('pdfExportBtn').addEventListener('click', function () {
+            const dateFrom = document.getElementById('date_from').value;
+            const dateTo = document.getElementById('date_to').value;
+
+            let url = '{{ route('export', ['modelType' => 'posts']) }}';
+            url += '?export_type=pdf'; // Indicate PDF export
+
+            if (dateFrom) {
+                url += '&date_from=' + dateFrom;
+            }
+            if (dateTo) {
+                url += '&date_to=' + dateTo;
+            }
+
+            window.location.href = url; // Trigger PDF export
         });
     </script>
 @stop
