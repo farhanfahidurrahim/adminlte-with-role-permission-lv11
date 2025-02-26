@@ -39,7 +39,7 @@ class CategoryController extends Controller
             'created_by' => auth()->user()->id,
         ]);
 
-        return redirect()->route('categories.index');
+        return redirect()->route('categories.index')->with('success', 'Created Successfully!');
     }
 
     /**

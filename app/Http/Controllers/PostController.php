@@ -21,8 +21,17 @@ class PostController extends Controller
                 ->editColumn('category_id', function ($post) {
                     return $post->category? $post->category->name : 'N/A';
                 })
-                ->addColumn('action', function($row){
-                    return '<a href="/posts/'.$row->id.'/edit" class="btn btn-primary">Edit</a>';
+                ->editColumn('created_by', function ($post) {
+                    return $post->createdBy? $post->createdBy->name : 'N/A';
+                })
+                ->editColumn('updated_by', function ($post) {
+                    return $post->updatedBy? $post->updatedBy->name : 'N/A';
+                })
+                ->addColumn('action', function ($row) {
+                    $editUrl = route('posts.edit', $row->id);
+                    $deleteUrl = route('posts.destroy', $row->id);
+                    return '<a href="' . $editUrl . '" class="btn btn-sm btn-warning">Edit</a>
+                    <button class="btn btn-sm btn-danger deleteData" data-id="' . $row->id . '" data-url="' . $deleteUrl . '">Delete</button>';
                 })
                 ->addIndexColumn()
                 ->make(true);
@@ -55,6 +64,7 @@ class PostController extends Controller
             'name' => $request->name,
             'category_id' => $request->category_id,
             'status' => $request->status,
+            'created_by' => auth()->user()->id,
         ]);
 
         return redirect()->route('posts.index');
@@ -73,7 +83,10 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $categories = Category::all();
+
+        return view('pages.post.edit', compact('post' ,'categories'));
     }
 
     /**
@@ -87,8 +100,9 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return response()->json(['success' => 'Post deleted successfully!']);
     }
 }

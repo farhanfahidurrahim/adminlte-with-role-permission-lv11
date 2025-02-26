@@ -1,10 +1,10 @@
 @extends('adminlte::page')
 
-@section('title', 'Create | Post')
+@section('title', 'Edit | Post')
 
 @section('content_header')
     <div class="d-flex justify-content-between">
-        <h1>Create New</h1>
+        <h1>Post | Edit</h1>
         <a href="{{ route('posts.index') }}" class="btn btn-info">Back</a>
     </div>
 @stop
@@ -18,7 +18,7 @@
 
                 <div class="form-group">
                     <label for="name">Name <span class="text-danger">*</span></label>
-                    <input type="text" name="name" value="{{ old('name') }}" id="name" class="form-control" placeholder="Enter name">
+                    <input type="text" name="name" value="{{ old('name', $post->name) }}" id="name" class="form-control" placeholder="Enter name">
                     @error('name')
                     <div class="text-danger mt-1">{{ $message }}</div>
                     @enderror
@@ -50,7 +50,7 @@
                 </div>
 
                 <!-- Submit Button -->
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Update</button>
                 <a href="{{ route('posts.index') }}" class="btn btn-secondary">Cancel</a>
             </form>
         </div>

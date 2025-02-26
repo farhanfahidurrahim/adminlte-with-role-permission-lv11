@@ -90,11 +90,6 @@
 
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.css" />
-    <!-- DataTables CSS (Bootstrap 4 version) -->
-{{--    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css">--}}
-
-    <!-- Include Select2 CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 
 </head>
 
@@ -139,11 +134,7 @@
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
 
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
-    <!-- Include Select2 JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <!-- Select2 JS -->
     <script>
         $(document).ready(function() {
             $('.select2').select2();
@@ -152,14 +143,61 @@
 
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
-    <!-- DataTables JS (Bootstrap 4 version) -->
-{{--    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>--}}
-{{--    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>--}}
     <script>
         $(document).ready(function() {
             $('#myTable').DataTable();
         });
     </script>
+
+    <!-- Toastr JS -->
+    <script>
+        $(document).ready(function() {
+            @if(session('success'))
+            toastr.success("{{ session('success') }}");
+            @endif
+
+            @if(session('error'))
+            toastr.error("{{ session('error') }}");
+            @endif
+        });
+    </script>
+
+    <!-- SweetAlert2  JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).on('click', '.deleteData', function() {
+            var deleteUrl = $(this).data('url');
+            console.log(deleteUrl)
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                console.log(result);
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: deleteUrl,
+                        type: 'DELETE',
+                        data: {
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                            Swal.fire('Deleted!', 'Your post has been deleted.', 'success');
+                            location.reload();
+                        },
+                        error: function(response) {
+                            Swal.fire('Error!', 'Something went wrong.', 'error');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
 </body>
 
 </html>

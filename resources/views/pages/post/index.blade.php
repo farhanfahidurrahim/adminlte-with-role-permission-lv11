@@ -17,6 +17,8 @@
             <th>Name</th>
             <th>Category</th>
             <th>Status</th>
+            <th>Created By</th>
+            <th>Updated By</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -40,6 +42,8 @@
                     { data: 'name', name: 'name' },
                     { data: 'category_id', name: 'category_id' },
                     { data: 'status', name: 'status' },
+                    { data: 'created_by', name: 'created_by' },
+                    { data: 'updated_by', name: 'updated_by' },
                     { data: 'action', name: 'action', orderable: false, searchable: false },
                 ],
             });
