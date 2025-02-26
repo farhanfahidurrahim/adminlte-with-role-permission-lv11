@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -12,13 +13,21 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         if (request()->ajax()) {
             $posts = Post::with('category', 'createdBy', 'updatedBy');
 
+            // Apply Date Filter
+            if (!empty($request->date_from) && !empty($request->date_to)) {
+                $posts->whereBetween('date', [$request->date_from . ' 00:00:00', $request->date_to . ' 23:59:59']);
+            }
+
             return DataTables::of($posts)
                 ->addIndexColumn()
+                ->editColumn('date', function ($post) {
+                    return Carbon::parse($post->date)->format('d M Y');
+                })
                 ->editColumn('category_id', function ($post) {
                     return $post->category? $post->category->name : 'N/A';
                 })

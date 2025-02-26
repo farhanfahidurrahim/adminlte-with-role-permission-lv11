@@ -16,12 +16,13 @@ class PostSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        foreach (range(1, 1000) as $index) {
+        foreach (range(1, 5000) as $index) {
             DB::table('posts')->insert([
                 'name' => $faker->word,
+                'date' => $faker->dateTimeBetween('2020-01-01', '2025-12-31')->format('Y-m-d H:i:s'),
                 'category_id' => $faker->numberBetween(1, 15),
-                'status' =>  $faker->randomElement(['published', 'draft']),
                 'created_by' => 1,
+                'status' =>  $faker->randomElement(['published', 'draft']),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
