@@ -63,7 +63,8 @@ class ExportController extends Controller
         foreach ($data as $item) {
             $column = 'A'; // Reset to column A
             foreach ($headers as $header) {
-                $sheet->setCellValue($column . $row, $item->{$header});
+                $value = $header === 'category_name' ? ($item->category->name ?? 'N/A') : $item->{$header};
+                $sheet->setCellValue($column . $row, $value);
                 $column++; // Move to the next column
             }
             $row++; // Move to the next row
@@ -114,7 +115,7 @@ class ExportController extends Controller
     {
         switch ($modelType) {
             case 'posts':
-                return ['id', 'name', 'date', 'category_id', 'status', 'created_by', 'updated_by'];
+                return ['id', 'name', 'date', 'category_name', 'status', 'created_by', 'updated_by'];
             case 'categories':
                 return ['id', 'name', 'description'];
             default:

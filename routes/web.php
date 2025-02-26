@@ -26,6 +26,6 @@ Route::middleware('auth')->group(function () {
         Route::resource('/posts', PostController::class);
 
     });
-        // Export
-        Route::get('/export/{modelType}', [ExportController::class, 'export'])->name('export');
+    // Export Excel & PDF
+    Route::get('/export/{modelType}', [ExportController::class, 'export'])->name('export');
 });
