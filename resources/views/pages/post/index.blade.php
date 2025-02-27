@@ -10,24 +10,27 @@
 @stop
 @section('content')
     {{-- Date Range Filter --}}
-    <div class="row mb-2">
-        <div class="col-md-2">
-            <input type="date" id="date_from" class="form-control" placeholder="From Date (YYYY-MM-DD)">
-        </div>
-        <div class="col-md-2">
-            <input type="date" id="date_to" class="form-control" placeholder="To Date (YYYY-MM-DD)">
-        </div>
-        <div class="col-md-2">
-            <button id="filter" class="btn btn-sm btn-primary">Filter</button>
-            <button id="reset" class="btn btn-sm btn-secondary">Reset</button>
+    <div class="row mb-2 d-flex justify-content-between">
+        <div class="col-md-8 d-flex">
+            <div class="col-md-3">
+                <input type="date" id="date_from" class="form-control" placeholder="From Date (YYYY-MM-DD)">
+            </div>
+            <div class="col-md-3">
+                <input type="date" id="date_to" class="form-control" placeholder="To Date (YYYY-MM-DD)">
+            </div>
+            <div class="col-md-3 d-flex">
+                <button id="filter" class="btn btn-sm btn-primary mr-2">Filter</button>
+                <button id="reset" class="btn btn-sm btn-secondary">Reset</button>
+            </div>
         </div>
 
-        <!-- Export -->
-        <div class="col-md-4">
-            <a href="#" class="btn btn-sm btn-success" id="excelExportBtn">Excel</a>
-            <a href="#" class="btn btn-sm btn-danger" id="pdfExportBtn">PDF</a>
+        <!-- Export Buttons -->
+        <div class="col-md-4 d-flex justify-content-end">
+            <a href="#" class="btn btn-sm btn-success mr-2" id="excelExportBtn"> <i class="fas fa-file-excel mr-1"></i>Excel</a>
+            <a href="#" class="btn btn-sm btn-danger" id="pdfExportBtn"><i class="fas fa-file-pdf mr-1"></i>PDF</a>
         </div>
     </div>
+
 
     {{-- Yajra DataTable --}}
     <table id="yajraTable" class="table display" style="width:100%">
@@ -93,37 +96,55 @@
     {{--Handle export button click with date filters--}}
     <script>
         // Handle EXCEL export button click
-        document.getElementById('excelExportBtn').addEventListener('click', function () {
-            const dateFrom = document.getElementById('date_from').value;
-            const dateTo = document.getElementById('date_to').value;
+        $(document).ready(function () {
+            var table = $('#yajraTable').DataTable();
 
-            let url = '{{ route('export', ['modelType' => 'posts']) }}';
-            if (dateFrom) {
-                url += '?date_from=' + dateFrom;
-            }
-            if (dateTo) {
-                url += '&date_to=' + dateTo;
-            }
+            $('#excelExportBtn').click(function () {
+                const dateFrom = $('#date_from').val();
+                const dateTo = $('#date_to').val();
+                const searchValue = table.search(); // Get search input from DataTable
 
-            window.location.href = url; // Trigger the download
-        });
+                console.log("searchValue:", searchValue); // Debugging output
 
-        // Handle PDF export button click
-        document.getElementById('pdfExportBtn').addEventListener('click', function () {
-            const dateFrom = document.getElementById('date_from').value;
-            const dateTo = document.getElementById('date_to').value;
+                let url = '{{ route('export', ['modelType' => 'posts']) }}';
+                let params = [];
 
-            let url = '{{ route('export', ['modelType' => 'posts']) }}';
-            url += '?export_type=pdf'; // Indicate PDF export
+                if (dateFrom) params.push('date_from=' + dateFrom);
+                if (dateTo) params.push('date_to=' + dateTo);
+                if (searchValue) params.push('search=' + encodeURIComponent(searchValue));
 
-            if (dateFrom) {
-                url += '&date_from=' + dateFrom;
-            }
-            if (dateTo) {
-                url += '&date_to=' + dateTo;
-            }
+                if (params.length > 0) {
+                    url += '?' + params.join('&');
+                }
 
-            window.location.href = url; // Trigger PDF export
+                console.log("url", url)
+
+                window.location.href = url;
+            });
+
+
+            // Handle PDF export button click
+            $('#pdfExportBtn').click(function () {
+                const dateFrom = document.getElementById('date_from').value;
+                const dateTo = document.getElementById('date_to').value;
+                const searchValue = table.search();
+
+                let url = '{{ route('export', ['modelType' => 'posts']) }}';
+                url += '?export_type=pdf';
+                let params = [];
+
+                if (dateFrom) params.push('date_from=' + dateFrom);
+                if (dateTo) params.push('date_to=' + dateTo);
+                if (searchValue) params.push('search=' + encodeURIComponent(searchValue));
+
+                if (params.length > 0) {
+                    url += '&' + params.join('&');
+                }
+
+                console.log("url", url)
+
+                window.location.href = url; // Trigger PDF export
+            });
         });
     </script>
 @stop

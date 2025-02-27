@@ -22,4 +22,13 @@ class Post extends Model
     {
         return $this->belongsTo(User::class, 'updated_by', 'id');
     }
+
+    public static function searchableColumns()
+    {
+        return [
+            'name' => 'LIKE',
+            'status' => 'LIKE',
+        ];
+    }
+
 }

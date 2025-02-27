@@ -16,9 +16,9 @@ class PostSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        foreach (range(1, 5000) as $index) {
+        foreach (range(1, 500) as $index) {
             DB::table('posts')->insert([
-                'name' => $faker->word,
+                'name' => ucwords($faker->name),
                 'date' => $faker->dateTimeBetween('2020-01-01', '2025-12-31')->format('Y-m-d H:i:s'),
                 'category_id' => $faker->numberBetween(1, 15),
                 'created_by' => 1,

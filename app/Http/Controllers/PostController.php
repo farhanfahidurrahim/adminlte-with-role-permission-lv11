@@ -16,7 +16,7 @@ class PostController extends Controller
     public function index(Request $request)
     {
         if (request()->ajax()) {
-            $posts = Post::with('category', 'createdBy', 'updatedBy');
+            $posts = Post::with('category', 'createdBy', 'updatedBy')->orderBy('name', 'asc');
 
             // Apply Date Filter
             if (!empty($request->date_from) && !empty($request->date_to)) {
@@ -73,12 +73,14 @@ class PostController extends Controller
         $request->validate([
             'name' => 'required|string|max:100|unique:posts',
             'category_id' => 'required|exists:categories,id',
+            'date' => 'nullable|date|before_or_equal:today',
             'status' => 'required|in:published,draft',
         ]);
 
         Post::create([
-            'name' => $request->name,
+            'name' => ucwords(strtolower($request->name)),
             'category_id' => $request->category_id,
+            'date' => $request->date ? Carbon::parse($request->date)->toDateString() : Carbon::now()->toDateString(),
             'status' => $request->status,
             'created_by' => auth()->user()->id,
         ]);

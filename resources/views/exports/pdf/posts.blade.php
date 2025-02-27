@@ -26,6 +26,7 @@
 <table>
     <thead>
     <tr>
+        <th>SL</th>
         <th>ID</th>
         <th>Name</th>
         <th>Date</th>
@@ -38,13 +39,14 @@
     <tbody>
     @foreach ($data as $item)
         <tr>
+            <td>{{ $loop->iteration }}</td>
             <td>{{ $item->id }}</td>
             <td>{{ $item->name }}</td>
             <td>{{ $item->date }}</td>
-            <td>{{ $item->category_id }}</td>
+            <td>{{ $item->category->name }}</td>
             <td>{{ $item->status }}</td>
-            <td>{{ $item->created_by }}</td>
-            <td>{{ $item->updated_by }}</td>
+            <td>{{ $item->createdBy->name }}</td>
+            <td>{{ $item->updatedBy ? $item->updatedBy->name : 'N/A' }}</td>
         </tr>
     @endforeach
     </tbody>

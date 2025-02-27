@@ -18,7 +18,7 @@ class CategorySeeder extends Seeder
 
         foreach (range(1, 15) as $index) {
             DB::table('categories')->insert([
-                'name' => $faker->word,
+                'name' => ucwords($faker->word),
                 'created_by' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),

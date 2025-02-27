@@ -4,7 +4,7 @@
 
 @section('content_header')
     <div class="d-flex justify-content-between">
-        <h1>Create New</h1>
+        <h1>Post | New Create</h1>
         <a href="{{ route('posts.index') }}" class="btn btn-info">Back</a>
     </div>
 @stop
@@ -29,7 +29,10 @@
                     <select name="category_id" class="form-control select2">
                         <option value="">Select</option>
                         @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            <option value="{{ $category->id }}"
+                                {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                {{ $category->name }}
+                            </option>
                         @endforeach
                     </select>
                     @error('category_id')
@@ -38,11 +41,19 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="name">Date </label>
+                    <input type="date" name="date" value="{{ old('date') }}" id="date" class="form-control" placeholder="Enter name">
+                    @error('date')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="form-group">
                     <label for="name">Status <span class="text-danger">*</span></label>
                     <select name="status" class="form-control">
                         <option value="">Select</option>
-                        <option value="published">Published</option>
-                        <option value="draft">Draft</option>
+                        <option value="published" {{ old('status') == 'published' ? 'selected' : '' }}>Published</option>
+                        <option value="draft" {{ old('status') == 'draft' ? 'selected' : '' }}>Draft</option>
                     </select>
                     @error('status')
                     <div class="text-danger mt-1">{{ $message }}</div>
