@@ -61,7 +61,7 @@ class ExportController extends Controller
             }
         }
 
-        $data = $query->get();
+        $data = $query->orderBy('name', 'asc')->get();
 
         if ($request->has('export_type') && $request->export_type == 'pdf') {
             return $this->exportPdf($data, $modelType);
