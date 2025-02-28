@@ -14,9 +14,12 @@
         <div class="card-body">
             <h3>{{ $post->name }}</h3>
             <p><strong>Category:</strong> {{ $post->category ? $post->category->name : 'N/A' }}</p>
+            <p><strong>Date:</strong> {{ \Carbon\Carbon::parse($post->date)->format('d M Y') }}</p>
             <p><strong>Status:</strong> {{ $post->status }}</p>
             <p><strong>Created By:</strong> {{ $post->createdBy ? $post->createdBy->name : 'N/A' }}</p>
             <p><strong>Updated By:</strong> {{ $post->updatedBy ? $post->updatedBy->name : 'N/A' }}</p>
+            <p><strong>Created At:</strong> {{ $post->created_at ? $post->created_at->format('Y-m-d h:i A') : 'N/A' }}</p>
+            <p><strong>Updated At:</strong> {{ $post->updated_at ? $post->updated_at->format('Y-m-d h:i A') : 'N/A' }}</p>
 
             <a href="{{ route('posts.index') }}" class="btn btn-info">Back to List</a>
         </div>

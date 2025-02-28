@@ -39,7 +39,14 @@ class ExportController extends Controller
                 $searchableFields = $model::searchableColumns(); // Model searchable columns
                 $query->where(function ($q) use ($searchableFields, $search) {
                     foreach ($searchableFields as $field => $operator) {
-                        $q->orWhere($field, $operator, "%{$search}%");
+                        if ($field === 'category_id') {
+                            // Search in related 'category' model
+                            $q->orWhereHas('category', function ($categoryQuery) use ($search) {
+                                $categoryQuery->where('name', 'LIKE', "%{$search}%");
+                            });
+                        } else {
+                            $q->orWhere($field, $operator, "%{$search}%");
+                        }
                     }
                 });
             }
@@ -52,12 +59,21 @@ class ExportController extends Controller
                 $query->whereDate('date', '<=', Carbon::createFromFormat('Y-m-d', $dateTo)->endOfDay());
             }
 
-            // If no date range is provided, the search is independent
+            // If no date is provided, the search only
             if ($search) {
                 $searchableFields = $model::searchableColumns(); // Model searchable columns
-                foreach ($searchableFields as $field => $operator) {
-                    $query->orWhere($field, $operator, "%{$search}%");
-                }
+                $query->where(function ($q) use ($searchableFields, $search) {
+                    foreach ($searchableFields as $field => $operator) {
+                        if ($field === 'category_id') {
+                            // Search in related 'category' model
+                            $q->orWhereHas('category', function ($categoryQuery) use ($search) {
+                                $categoryQuery->where('name', 'LIKE', "%{$search}%");
+                            });
+                        } else {
+                            $q->orWhere($field, $operator, "%{$search}%");
+                        }
+                    }
+                });
             }
         }
 

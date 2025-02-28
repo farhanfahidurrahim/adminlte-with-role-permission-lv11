@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name', 100)->index();
             $table->date('date')->index();
             $table->foreignId('category_id')->constrained()->index();
+            $table->string('image')->nullable();
+            $table->string('document')->nullable();
             $table->foreignId('created_by')->index();
             $table->foreignId('updated_by')->nullable()->index();
             $table->enum('status', ['published', 'draft'])->default('published');

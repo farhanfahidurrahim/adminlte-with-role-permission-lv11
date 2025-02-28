@@ -18,9 +18,16 @@ class PostController extends Controller
         if (request()->ajax()) {
             $posts = Post::with('category', 'createdBy', 'updatedBy')->orderBy('name', 'asc');
 
+            $dateFrom = $request->input('date_from');
+            $dateTo = $request->input('date_to');
+
             // Apply Date Filter
-            if (!empty($request->date_from) && !empty($request->date_to)) {
-                $posts->whereBetween('date', [$request->date_from . ' 00:00:00', $request->date_to . ' 23:59:59']);
+            if (!empty($dateFrom) && !empty($dateTo)) {
+                $posts->whereBetween('date', [$dateFrom, $dateTo]);
+            } elseif ($dateFrom) {
+                $posts->whereDate('date', '>=', $dateFrom);
+            } elseif ($dateTo) {
+                $posts->whereDate('date', '<=', $dateTo);
             }
 
             return DataTables::of($posts)

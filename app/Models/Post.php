@@ -28,7 +28,7 @@ class Post extends Model
         return [
             'name' => 'LIKE',
             'status' => 'LIKE',
+            'category_id' => 'LIKE',
         ];
     }
-
 }

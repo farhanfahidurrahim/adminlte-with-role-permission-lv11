@@ -12,9 +12,11 @@
     {{-- Date Range Filter --}}
     <div class="row mb-2 d-flex justify-content-between">
         <div class="col-md-8 d-flex">
+                <small>From:</small>
             <div class="col-md-3">
                 <input type="date" id="date_from" class="form-control" placeholder="From Date (YYYY-MM-DD)">
             </div>
+                <small>To:</small>
             <div class="col-md-3">
                 <input type="date" id="date_to" class="form-control" placeholder="To Date (YYYY-MM-DD)">
             </div>
