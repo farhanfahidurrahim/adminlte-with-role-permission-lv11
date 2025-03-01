@@ -12,6 +12,16 @@
 @section('content')
     <div class="card">
         <div class="card-body">
+            <span>
+                <img src="{{ $post->image ? asset('storage/images/post/' . $post->image) : asset('storage/images/no-image.png') }}" alt="Post Image" width="150" height="100">
+            </span>
+            <span>
+                @if($post->document)
+                    <a href="{{ asset('storage/documents/post/' . $post->document) }}" >View Document</a>
+                @else
+                    <p>No document available</p>
+                @endif
+            </span>
             <h3>{{ $post->name }}</h3>
             <p><strong>Category:</strong> {{ $post->category ? $post->category->name : 'N/A' }}</p>
             <p><strong>Date:</strong> {{ \Carbon\Carbon::parse($post->date)->format('d M Y') }}</p>

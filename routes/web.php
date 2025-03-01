@@ -27,10 +27,7 @@ Route::middleware('auth')->group(function () {
 
     });
     // Export Excel & PDF
+    Route::get('/pdf-download/{modelType}/{id}', [ExportController::class, 'singlePdfDownload'])->name('pdfDownload');
     Route::get('/export/{modelType}', [ExportController::class, 'export'])->name('export');
-});
-
-Route::get('/test-pdf', function () {
-    return view('exports.pdf.posts', ['data' => []]);
 });
 

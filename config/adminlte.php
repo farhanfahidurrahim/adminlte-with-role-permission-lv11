@@ -422,25 +422,16 @@ return [
             ],
         ],
         [
-            'text' => 'profile',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'change_password',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text' => 'multilevel',
-            'icon' => 'fas fa-fw fa-share',
+            'text' => 'Settings',
+            'icon' => 'fas fa-fw fa-cogs',
             'submenu' => [
                 [
-                    'text' => 'level_one',
-                    'url' => '#',
+                    'text' => 'Profile',
+                    'route' => ['users.show', ['user' => '1']],
+                    'can' => 'users.show',
                 ],
                 [
-                    'text' => 'level_one',
+                    'text' => 'Change Password',
                     'url' => '#',
                     'submenu' => [
                         [
@@ -450,25 +441,59 @@ return [
                         [
                             'text' => 'level_two',
                             'url' => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                            ],
                         ],
                     ],
                 ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
             ],
         ],
+//        [
+//            'text' => 'profile',
+//            'url' => 'admin/settings',
+//            'icon' => 'fas fa-fw fa-user',
+//        ],
+//        [
+//            'text' => 'change_password',
+//            'url' => 'admin/settings',
+//            'icon' => 'fas fa-fw fa-lock',
+//        ],
+//        [
+//            'text' => 'multilevel',
+//            'icon' => 'fas fa-fw fa-share',
+//            'submenu' => [
+//                [
+//                    'text' => 'level_one',
+//                    'url' => '#',
+//                ],
+//                [
+//                    'text' => 'level_one',
+//                    'url' => '#',
+//                    'submenu' => [
+//                        [
+//                            'text' => 'level_two',
+//                            'url' => '#',
+//                        ],
+//                        [
+//                            'text' => 'level_two',
+//                            'url' => '#',
+//                            'submenu' => [
+//                                [
+//                                    'text' => 'level_three',
+//                                    'url' => '#',
+//                                ],
+//                                [
+//                                    'text' => 'level_three',
+//                                    'url' => '#',
+//                                ],
+//                            ],
+//                        ],
+//                    ],
+//                ],
+//                [
+//                    'text' => 'level_one',
+//                    'url' => '#',
+//                ],
+//            ],
+//        ],
         ['header' => 'labels'],
         [
             'text' => 'important',

@@ -134,22 +134,28 @@
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
 
-    <!-- DataTables JS -->
+
+
+    <!-- Start DataTables JS -->
     <script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
     <script>
         $(document).ready(function() {
             $('#myTable').DataTable();
         });
     </script>
+    <!-- End DataTables JS -->
 
-    <!-- Select2 JS -->
+
+    <!-- Start Select2 JS -->
     <script>
         $(document).ready(function() {
             $('.select2').select2();
         });
     </script>
+    <!-- End Select2 JS -->
 
-    <!-- Toastr JS -->
+
+    <!-- Start Toastr JS -->
     <script>
         $(document).ready(function() {
             @if(session('success'))
@@ -161,8 +167,10 @@
             @endif
         });
     </script>
+    <!-- End Toastr JS -->
 
-    <!-- SweetAlert2  JS -->
+
+    <!-- Start SweetAlert2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $(document).on('click', '.deleteData', function() {
@@ -197,6 +205,7 @@
             });
         });
     </script>
+    <!-- End SweetAlert2 JS -->
 
 </body>
 

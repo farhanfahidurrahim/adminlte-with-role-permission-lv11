@@ -7,6 +7,7 @@ use App\Models\Post;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
+use Intervention\Image\Laravel\Facades\Image;
 
 class PostController extends Controller
 {
@@ -53,9 +54,12 @@ class PostController extends Controller
                     $viewUrl = route('posts.show', $row->id);
                     $editUrl = route('posts.edit', $row->id);
                     $deleteUrl = route('posts.destroy', $row->id);
+                    $pdfDownloadUrl = route('pdfDownload', ['modelType' => 'post', 'id' => $row->id]);
+
                     return '<a href="' . $viewUrl . '" class="btn btn-sm btn-info" title="View"><i class="fas fa-eye"></i></a>
                         <a href="' . $editUrl . '" class="btn btn-sm btn-warning" title="Edit"><i class="fas fa-edit"></i></a>
-                        <button class="btn btn-sm btn-danger deleteData" data-id="' . $row->id . '" data-url="' . $deleteUrl . '" title="Delete"><i class="fas fa-trash"></i></button>';
+                        <button class="btn btn-sm btn-danger deleteData" data-id="' . $row->id . '" data-url="' . $deleteUrl . '" title="Delete"><i class="fas fa-trash"></i></button>
+                        <a href="' . $pdfDownloadUrl . '" class="btn btn-sm btn-primary" title="Download PDF"><i class="fas fa-file-pdf"></i></a>';
                 })
                 ->make(true);
         }
@@ -81,13 +85,42 @@ class PostController extends Controller
             'name' => 'required|string|max:100|unique:posts',
             'category_id' => 'required|exists:categories,id',
             'date' => 'nullable|date|before_or_equal:today',
+            'image' => 'nullable|mimes:jpeg,jpg,png,webp|max:2048',
+            'document' => 'nullable|mimes:pdf,docx,doc|max:2048',
             'status' => 'required|in:published,draft',
         ]);
 
+        $imageName = NULL;
+        if ($request->hasFile('image')) {
+            $uploadImage = $request->file('image');
+            $image = Image::read($uploadImage)->resize(300, 200);
+            $imageName = uniqid() . '.' . $uploadImage->getClientOriginalExtension();
+
+            $imageDirectory = storage_path('app/public/images/post/');
+            if (!is_dir($imageDirectory)) {
+                mkdir($imageDirectory, 0755, true);
+            }
+            $image->save($imageDirectory . $imageName);
+        }
+
+        $documentName = null;
+        if ($request->hasFile('document')) {
+            $document = $request->file('document');
+            $documentName = uniqid() . '.' . $document->getClientOriginalExtension();
+
+            $documentDirectory = storage_path('app/public/documents/post/');
+            if (!is_dir($documentDirectory)) {
+                mkdir($documentDirectory, 0755, true);
+            }
+            $document->move($documentDirectory, $documentName);
+        }
+
         Post::create([
             'name' => ucwords(strtolower($request->name)),
-            'category_id' => $request->category_id,
             'date' => $request->date ? Carbon::parse($request->date)->toDateString() : Carbon::now()->toDateString(),
+            'category_id' => $request->category_id,
+            'image' => $imageName,
+            'document' => $documentName,
             'status' => $request->status,
             'created_by' => auth()->user()->id,
         ]);

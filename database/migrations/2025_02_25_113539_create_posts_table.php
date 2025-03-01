@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('document')->nullable();
             $table->foreignId('created_by')->index();
             $table->foreignId('updated_by')->nullable()->index();
-            $table->enum('status', ['published', 'draft'])->default('published');
+            $table->enum('status', ['Published', 'Draft'])->default('published');
             $table->timestamps();
         });
     }

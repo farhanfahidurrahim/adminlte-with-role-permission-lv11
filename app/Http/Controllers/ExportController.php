@@ -12,6 +12,31 @@ use Carbon\Carbon;
 
 class ExportController extends Controller
 {
+    public function singlePdfDownload($modelName, $id)
+    {
+        // Define available models and their respective Blade views
+        $models = [
+            'category' => ['model' => Category::class, 'view' => 'exports.pdf-single.category'],
+            'post' => ['model' => Post::class, 'view' => 'exports.pdf-single.post'],
+        ];
+
+        // Validate model type
+        if (!array_key_exists($modelName, $models)) {
+            return abort(404, 'Invalid Model Type');
+        }
+
+        // Retrieve model dynamically
+        $modelClass = $models[$modelName]['model'];
+        $data = $modelClass::findOrFail($id);
+
+        // Generate PDF using the corresponding Blade view
+        $pdf = Pdf::loadView($models[$modelName]['view'], compact('data'));
+
+        // Return PDF for download
+        return $pdf->download("{$modelName}_{$id}.pdf");
+    }
+    // End singlePdfDownload
+
     public function export(Request $request, $modelType)
     {
         // Dynamically select the model based on the $modelType parameter
@@ -161,7 +186,7 @@ class ExportController extends Controller
     // Export PDF
     private function exportPdf($data, $modelType)
     {
-        $pdf = Pdf::loadView('exports.pdf.posts', ['data' => $data]);
+        $pdf = Pdf::loadView('exports.pdf-all.posts', ['data' => $data]);
 
         // Return the PDF download response
         return $pdf->download($modelType . '_export_' . now()->format('Y_m_d_H_i_s') . '.pdf');

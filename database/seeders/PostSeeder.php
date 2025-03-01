@@ -22,7 +22,7 @@ class PostSeeder extends Seeder
                 'date' => $faker->dateTimeBetween('2020-01-01', '2025-12-31')->format('Y-m-d H:i:s'),
                 'category_id' => $faker->numberBetween(1, 15),
                 'created_by' => 1,
-                'status' =>  $faker->randomElement(['published', 'draft']),
+                'status' =>  $faker->randomElement(['Published', 'Draft']),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

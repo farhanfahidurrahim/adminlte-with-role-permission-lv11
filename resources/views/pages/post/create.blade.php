@@ -13,7 +13,7 @@
 
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('posts.store') }}" method="POST">
+            <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="row">
@@ -76,7 +76,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="image">Image </label>
-                            <input type="file" name="image" id="image" class="form-control" accept="image/*">
+                            <input type="file" name="image" id="image" accept="image/*" />
                             @error('image')
                             <div class="text-danger mt-1">{{ $message }}</div>
                             @enderror
@@ -86,7 +86,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="document">Document </label>
-                            <input type="file" name="document" id="document" class="form-control" accept=".pdf,.doc,.docx,.txt,.xlsx,.pptx">
+                            <input type="file" name="document" id="document" accept=".pdf,.doc,.docx,.txt">
                             @error('document')
                             <div class="text-danger mt-1">{{ $message }}</div>
                             @enderror
@@ -109,5 +109,7 @@
 @stop
 
 @section('js')
-    <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
+    <script>
+        console.log("Hi, I'm using the Laravel-AdminLTE package!");
+    </script>
 @stop
