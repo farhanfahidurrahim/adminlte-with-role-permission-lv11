@@ -427,22 +427,13 @@ return [
             'submenu' => [
                 [
                     'text' => 'Profile',
-                    'route' => ['users.show', ['user' => '1']],
-                    'can' => 'users.show',
+                    'route' => 'profile.my',
+                    'can' => 'profile.my',
                 ],
                 [
                     'text' => 'Change Password',
-                    'url' => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                        ],
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                        ],
-                    ],
+                    'route' => 'profile.change-password',
+                    'can' => 'profile.change-password',
                 ],
             ],
         ],

@@ -5,6 +5,7 @@ use App\Http\Controllers\ExportController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -25,6 +26,8 @@ Route::middleware('auth')->group(function () {
         Route::resource('/categories', CategoryController::class);
         Route::resource('/posts', PostController::class);
 
+        Route::get('/my-profile', [ProfileController::class, 'myProfile'])->name('profile.my');
+        Route::get('/change-password', [ProfileController::class, 'changePassword'])->name('profile.change-password');
     });
     // Export Excel & PDF
     Route::get('/pdf-download/{modelType}/{id}', [ExportController::class, 'singlePdfDownload'])->name('pdfDownload');
