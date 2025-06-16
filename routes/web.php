@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DataTableController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PermissionController;
@@ -16,11 +17,17 @@ Auth::routes();
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::middleware('auth')->group(function () {
+    // DataTable
+        Route::get('/bootstrap-datatable', [DataTableController::class, 'b'])->name('bootstrap.datatable');
+        Route::get('/jquery-datatable', [DataTableController::class, 'jquery'])->name('jquery.datatable');
+        Route::get('/yajra-datatable', [DataTableController::class, 'yajra'])->name('yajra.datatable');
+
     Route::middleware('check_permission')->group(function () {
         // Role & Permission & User
         Route::resource('/roles', RoleController::class);
         Route::resource('/permissions', PermissionController::class);
         Route::resource('/users', UserController::class);
+
 
         // Category & Post
         Route::resource('/categories', CategoryController::class);
@@ -33,4 +40,3 @@ Route::middleware('auth')->group(function () {
     Route::get('/pdf-download/{modelType}/{id}', [ExportController::class, 'singlePdfDownload'])->name('pdfDownload');
     Route::get('/export/{modelType}', [ExportController::class, 'export'])->name('export');
 });
-

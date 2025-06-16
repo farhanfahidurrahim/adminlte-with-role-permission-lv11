@@ -30,7 +30,7 @@ return [
     |
     */
 
-    'use_ico_only' => false,
+    'use_ico_only' => true,
     'use_full_favicon' => false,
 
     /*
@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => '<b>Admin</b>Panel',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -311,26 +311,49 @@ return [
         ],
 
         // Sidebar items:
-//        [
-//            'type' => 'sidebar-menu-search',
-//            'text' => 'search',
-//        ],
-//        [
-//            'text' => 'blog',
-//            'url' => 'admin/blog',
-//            'can' => 'manage-blog',
-//        ],
-//        [
-//            'text' => 'pages',
-//            'url' => 'admin/pages',
-//            'icon' => 'far fa-fw fa-file',
-//            'label' => 4,
-//            'label_color' => 'success',
-//        ],
+    //    [
+    //        'type' => 'sidebar-menu-search',
+    //        'text' => 'search',
+    //    ],
+    //    [
+    //        'text' => 'blog',
+    //        'url' => 'admin/blog',
+    //        'can' => 'manage-blog',
+    //    ],
+    //    [
+    //        'text' => 'pages',
+    //        'url' => 'admin/pages',
+    //        'icon' => 'far fa-fw fa-file',
+    //        'label' => 4,
+    //        'label_color' => 'success',
+    //    ],
         [
             'text' => 'Dashboard',
             'url' => '/',
             'icon' => 'fas fa-fw fa-share',
+        ],
+        // Category
+        [
+            'text' => 'DataTable',
+            'icon' => 'fas fa-table',
+            'submenu' => [
+                [
+                    'text' => 'Bootstrap DataTable',
+                    'icon_color' => 'cyan',
+                    'route' => 'categories.index',
+                    'can' => 'categories.index',
+                ],
+                [
+                    'text' => 'Jquery DataTable',
+                    'icon_color' => 'cyan',
+                    'route' => 'jquery.datatable',
+                ],
+                [
+                    'text' => 'Yajra DataTable',
+                    'icon_color' => 'cyan',
+                    'route' => 'yajra.datatable',
+                ],
+            ],
         ],
         // Category
         [
@@ -339,11 +362,13 @@ return [
             'submenu' => [
                 [
                     'text' => 'index',
+                    'icon_color' => 'cyan',
                     'route' => 'categories.index',
                     'can' => 'categories.index',
                 ],
                 [
                     'text' => 'create',
+                    'icon_color' => 'red',
                     'route' => 'categories.create',
                     'can' => 'categories.create',
                 ],
@@ -356,17 +381,21 @@ return [
             'submenu' => [
                 [
                     'text' => 'index',
+                    'icon_color' => 'cyan',
                     'route' => 'posts.index',
                     'can' => 'posts.index',
                 ],
                 [
                     'text' => 'create',
+                    'icon_color' => 'red',
                     'route' => 'posts.create',
                     'can' => 'posts.create',
                 ],
             ],
         ],
+
         ['header' => 'account_settings'],
+
         [
             'text' => 'Role & Permission',
             'icon' => 'fas fa-fw fa-share',
