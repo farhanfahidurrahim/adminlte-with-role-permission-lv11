@@ -18,9 +18,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::middleware('auth')->group(function () {
     // DataTable
-        Route::get('/bootstrap-datatable', [DataTableController::class, 'b'])->name('bootstrap.datatable');
-        Route::get('/jquery-datatable', [DataTableController::class, 'jquery'])->name('jquery.datatable');
-        Route::get('/yajra-datatable', [DataTableController::class, 'yajra'])->name('yajra.datatable');
+        Route::get('bootstrap-datatable', [DataTableController::class, 'bootstrapDataTable'])->name('datatable.bootstrap');
+        Route::get('jquery-datatable', [DataTableController::class, 'jquery'])->name('datatable.jquery');
+        Route::get('yajra-datatable', [DataTableController::class, 'yajra'])->name('datatable.yajra');
 
     Route::middleware('check_permission')->group(function () {
         // Role & Permission & User

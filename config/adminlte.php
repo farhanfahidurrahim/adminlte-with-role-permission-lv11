@@ -110,7 +110,7 @@ return [
     */
 
     'preloader' => [
-        'enabled' => true,
+        'enabled' => false,
         'mode' => 'fullscreen',
         'img' => [
             'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
@@ -340,18 +340,17 @@ return [
                 [
                     'text' => 'Bootstrap DataTable',
                     'icon_color' => 'cyan',
-                    'route' => 'categories.index',
-                    'can' => 'categories.index',
+                    'route' => 'datatable.bootstrap',
                 ],
                 [
                     'text' => 'Jquery DataTable',
                     'icon_color' => 'cyan',
-                    'route' => 'jquery.datatable',
+                    'route' => 'datatable.jquery',
                 ],
                 [
                     'text' => 'Yajra DataTable',
                     'icon_color' => 'cyan',
-                    'route' => 'yajra.datatable',
+                    'route' => 'datatable.yajra',
                 ],
             ],
         ],
@@ -568,7 +567,7 @@ return [
 
     'plugins' => [
         'Datatables' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',

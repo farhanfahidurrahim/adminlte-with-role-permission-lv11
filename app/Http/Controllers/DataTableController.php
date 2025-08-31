@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -11,9 +12,11 @@ class DataTableController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function bootstrap()
+    public function bootstrapDataTable()
     {
-        //
+        $categories = Category::all();
+
+        return view('pages.datatable.bootstrap', compact('categories'));
     }
 
     public function jquery()
@@ -21,7 +24,7 @@ class DataTableController extends Controller
         return view('pages.datatable.jquery');
     }
 
-    public function yajra()
+    public function yajra(Request $request)
     {
         if (request()->ajax()) {
             $posts = Post::with('category', 'createdBy', 'updatedBy')->orderBy('name', 'asc');
@@ -66,7 +69,7 @@ class DataTableController extends Controller
                     return '<a href="' . $viewUrl . '" class="btn btn-sm btn-info" title="View"><i class="fas fa-eye"></i></a>
                         <a href="' . $editUrl . '" class="btn btn-sm btn-warning" title="Edit"><i class="fas fa-edit"></i></a>
                         <button class="btn btn-sm btn-danger deleteData" data-id="' . $row->id . '" data-url="' . $deleteUrl . '" title="Delete"><i class="fas fa-trash"></i></button>
-                        <a href="' . $pdfDownloadUrl . '" class="btn btn-sm btn-primary" title="Download PDF"><i class="fas fa-download"></i></a>';
+                        <a href="' . $pdfDownloadUrl . '" class="btn btn-sm btn-danger" title="Download PDF"><i class="fas fa-download"></i></a>';
                 })
                 ->make(true);
         }

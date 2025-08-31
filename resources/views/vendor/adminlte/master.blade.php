@@ -88,9 +88,6 @@
         <meta name="msapplication-TileImage" content="{{ asset('favicon/ms-icon-144x144.png') }}">
     @endif
 
-    <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.css" />
-
 </head>
 
 <body class="@yield('classes_body')" @yield('body_data')>
@@ -135,9 +132,7 @@
     @yield('adminlte_js')
 
 
-
-    <!-- Start DataTables JS -->
-    <script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
+    <!-- Start DataTables global Function -->
     <script>
         $(document).ready(function() {
             $('#myTable').DataTable();
