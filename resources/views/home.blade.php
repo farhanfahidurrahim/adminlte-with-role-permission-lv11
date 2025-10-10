@@ -6,14 +6,14 @@
 @section('content_header')
     <div class="d-flex justify-content-between">
         <h1>Dashboard</h1>
-        <div>
-            <select class="form-control">
-                <option>Today</option>
-                <option>Yesterday</option>
-                <option>This Week</option>
-                <option>This Month</option>
-            </select>
-        </div>
+{{--        <div>--}}
+{{--            <select class="form-control">--}}
+{{--                <option>Today</option>--}}
+{{--                <option>Yesterday</option>--}}
+{{--                <option>This Week</option>--}}
+{{--                <option>This Month</option>--}}
+{{--            </select>--}}
+{{--        </div>--}}
     </div>
 @stop
 

@@ -13,6 +13,34 @@
 
 @section('auth_header', __('adminlte::adminlte.register_message'))
 
+@section('css')
+    <style>
+        .login-page {
+            min-height: 100vh;
+            background: linear-gradient(to bottom right, #111827, #1f2937, #000000);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-page::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            opacity: 0.1;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(120,119,198,0.3), transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255,119,198,0.3), transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(120,200,255,0.3), transparent 50%);
+            z-index: 0;
+        }
+
+        .login-box {
+            position: relative;
+            z-index: 10;
+        }
+    </style>
+@stop
+
 @section('auth_body')
     <form action="{{ $register_url }}" method="post">
         @csrf

@@ -332,7 +332,36 @@ return [
             'url' => '/',
             'icon' => 'fas fa-fw fa-share',
         ],
-        // Category
+
+        // Form
+        [
+            'text' => 'Form',
+            'icon' => 'fas fa-clipboard-list',
+            'submenu' => [
+                [
+                    'text' => 'General',
+                    'icon_color' => 'cyan',
+                    'route' => 'form.general',
+                ],
+                [
+                    'text' => 'Advanced',
+                    'icon_color' => 'cyan',
+                    'route' => 'form.advanced',
+                ],
+                [
+                    'text' => 'Editors',
+                    'icon_color' => 'cyan',
+                    'route' => 'form.editors',
+                ],
+                [
+                    'text' => 'Validation',
+                    'icon_color' => 'cyan',
+                    'route' => 'form.validation',
+                ],
+            ],
+        ],
+
+        // Datatable
         [
             'text' => 'DataTable',
             'icon' => 'fas fa-table',
@@ -354,6 +383,7 @@ return [
                 ],
             ],
         ],
+
         // Category
         [
             'text' => 'Category',

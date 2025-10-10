@@ -17,34 +17,6 @@
 @endphp
 
 @section('adminlte_css')
-    {{-- Custom CSS Start --}}
-    <style>
-        .{{ $auth_type ?? 'login' }}-page {
-            min-height: 100vh;
-            background: linear-gradient(to bottom right, #111827, #1f2937, #000000);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .{{ $auth_type ?? 'login' }}-page::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            opacity: 0.1;
-            background-image:
-                radial-gradient(circle at 20% 50%, rgba(120,119,198,0.3), transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255,119,198,0.3), transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(120,200,255,0.3), transparent 50%);
-            z-index: 0;
-        }
-
-        .{{ $auth_type ?? 'login' }}-box {
-            position: relative;
-            z-index: 10;
-        }
-    </style>
-    {{-- Custom CSS End --}}
-
     @stack('css')
     @yield('css')
 @stop
@@ -77,7 +49,7 @@
                 @endif
 
                 {{-- Logo Label --}}
-                <span style="color: #fff;">{!! config('adminlte.logo', '<b>Admin</b>LTE') !!}</span>
+                {!! config('adminlte.logo', '<b>Admin</b>LTE') !!}
 
             </a>
         </div>
