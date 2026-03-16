@@ -15,7 +15,7 @@ class PostSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        $totalRows = 500000;      // Total records
+        $totalRows = 50000;      // Total records
         $batchSize = 1000;        // Insert in batches of 1000
         $batches = ceil($totalRows / $batchSize);
 
