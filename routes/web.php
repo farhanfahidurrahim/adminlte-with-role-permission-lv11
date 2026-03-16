@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\XyzController;
@@ -38,6 +39,9 @@ Route::middleware('auth')->group(function () {
         // Category & Post
         Route::resource('/categories', CategoryController::class);
         Route::resource('/posts', PostController::class);
+
+        // Reports
+        Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
 
         Route::get('/my-profile', [ProfileController::class, 'myProfile'])->name('profile.my');
         Route::get('/change-password', [ProfileController::class, 'changePassword'])->name('profile.change-password');
